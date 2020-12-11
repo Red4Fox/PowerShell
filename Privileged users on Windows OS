@@ -1,0 +1,28 @@
+# Author is Unknown
+# Script for collecting users with Administrative privileges
+№ this script was compiled from two different scripts that were found on the Internet
+
+function get-localadmin { 
+param ($strcomputer) 
+ 
+$admins = Gwmi win32_groupuser –computer $strcomputer  
+$admins = $admins |? {$_.groupcomponent –like '*"Администраторы"'} 
+ 
+$admins |% { 
+$_.partcomponent –match “.+Domain\=(.+)\,Name\=(.+)$” > $nul 
+$matches[1].trim('"') + “\” + $matches[2].trim('"') 
+} 
+}
+
+$Servers = gc "C:\Users\RedFox\Desktop\PC_name.txt"
+
+foreach ($s in $Servers)
+{
+    Write-Host $s
+    $admins = get-localadmin $s 
+    foreach ($admin in $admins)
+    {
+        $str = "$s,$admin"
+        $str | Out-File "C:\Users\RedFox\Desktop\result.txt" -Append
+    }
+}
