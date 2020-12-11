@@ -1,0 +1,18 @@
+# This script was developed by RedFox
+# Please attention, it is necessary that the $file contains ip or fqd names, each name must be on a new line
+# This script was developed to check for updates that close the hole used by the WannaCry ransomware
+
+$file = 'C:\Users\RedFox\Desktop\pc_name.txt'
+$servers = gc $file
+
+foreach ($Server in $Servers)
+{
+if (Get-HotFix -ComputerName $Server | FT HotFixID | findstr 4012212)
+{
+write-Host "$server ok" -ForegroundColor Green
+}
+else
+{
+write-Host "$server no" -BackgroundColor Red
+}
+}
