@@ -1,5 +1,5 @@
-# Script developed by EedFox
-# it is necessary that the file contains ip or fqd names, each name must be on a new line
+# This script was developed by RedFox
+# Please attention, it is necessary that the $file contains ip or fqd names, each name must be on a new line
 
 $file = 'C:\Users\RedFox\Desktop\PC_nmae.txt'
 $servers = gc $file
