@@ -1,0 +1,17 @@
+# Script developed by EedFox
+# it is necessary that the file contains ip or fqd names, each name must be on a new line
+
+$file = 'C:\Users\RedFox\Desktop\PC_nmae.txt'
+$servers = gc $file
+ 
+foreach ($Server in $Servers)
+{
+if (test-Connection -ComputerName $Server -Count 1 -Quiet)
+{
+write-Host "$server ok" -ForegroundColor Green
+}
+else
+{
+write-Host "$server no" -BackgroundColor Red
+}
+}
